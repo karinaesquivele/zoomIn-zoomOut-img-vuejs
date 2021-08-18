@@ -5,9 +5,14 @@
     <button type="button" @click="zoomout()" > Zoom Out</button>
     </div>
 
-    <div class="main">
-    <img id="map" src="../assets/img/privada15.png" />
+    <div class="main" id="main">
+    <div id="mape">
+      <img id="map" src="../assets/img/privada15.png" />
     </div>
+    </div>
+
+    Drag the image: <br>
+
 
     <p>orem ipsum dolor sit amet consectetur adipisicing elit. Sapiente nesciunt corporis possimus fuga sit voluptatem, minima in vitae magnam tempore laboriosam doloremque. Quasi facere similique laborum ullam blanditiis nam quaerat.
     Debitis explicabo earum dolorum cupiditate, veniam ab praesentium facilis perspiciatis suscipit enim blanditiis! Molestias culpa facere maxime animi, quidem exercitationem nihil totam accusantium minus est autem. Molestias numquam asperiores itaque.
@@ -16,8 +21,27 @@
 </template>
 
 <script>
+//instalamos primero -> npm i gsap
+//importamos
+import gsap from "gsap";
+
+//importamos el plugin
+import Draggable from "gsap/Draggable";
+
+
+
+
+// registramos el plugin
+gsap.registerPlugin( Draggable); 
+
+
 export default {
   name: 'HelloWorld',
+  mounted(){
+    //aqui lo declaramos
+    Draggable.create("#mape img", {type:"x,y",bounds:"#main",edgeResistance:0.5
+});
+  },
   methods:{
     zoomin(){
         var myImg = document.getElementById("map");
@@ -42,6 +66,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#wrapper {
+  width:150px; /* width of viewport in your case 100% */
+  height:150px; /* height of viewport in your case 100% */
+  overflow:hidden;
+  margin:10px 0 0 0;
+  border:1px solid #777;
+  /*position:fixed;*/
+}
+
+#map {
+  position:relative; /* what #map img is relative to */
+}
+
+#map img{
+  position:absolute; /* need this to make dragging easy */
+  top:0;
+  left:0;
+  border:0 none transparent;
+}
 *body {
   margin: 0;
 }
@@ -75,14 +119,30 @@ export default {
 .main {
   padding: 16px;
   margin-top: 30px;
+  width: 600px;
+  height: 400px;
+  overflow: clip;
 }
 .main img {
         /* max-width: 100%; */
-        width: 100%;
+        
         height: auto;
 }
 .button {
   width: 300px;
   height: 60px;
+}
+
+
+/*estilos para el plugin */
+#mape {
+  position:relative; 
+}
+
+#mape img{
+  position:absolute; 
+  top:0;
+  left:0;
+  border:0 none transparent;
 }
 </style>
