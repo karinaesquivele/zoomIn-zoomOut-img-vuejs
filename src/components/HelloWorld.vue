@@ -38,6 +38,12 @@ gsap.registerPlugin( Draggable);
 export default {
   name: 'HelloWorld',
   mounted(){
+   var main = document.querySelector('.main')
+   var img = document.querySelector('#map')
+   var mainH = main.clientWidth;
+   img.style.width= (mainH-52)+ 'px'
+
+
     //aqui lo declaramos
     Draggable.create("#mape img", {type:"x,y",bounds:"#main",edgeResistance:0.5
 });
@@ -119,13 +125,13 @@ export default {
 .main {
   padding: 16px;
   margin-top: 30px;
-  width: 600px;
+  width: 900px;
   height: 400px;
   overflow: clip;
 }
 .main img {
         /* max-width: 100%; */
-        
+        widows: 100%;
         height: auto;
 }
 .button {
